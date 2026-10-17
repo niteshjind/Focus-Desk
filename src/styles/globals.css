@@ -1,0 +1,85 @@
+@import './tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: var(--ink);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+  }
+}
+
+/* Neobrutalism UI base classes */
+.neo-border {
+  border: 3px solid var(--ink);
+}
+
+.neo-shadow {
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.neo-shadow-sm {
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.neo-shadow-lg {
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.neo-shadow-xl {
+  box-shadow: 12px 12px 0 var(--ink);
+}
+
+/* Interactive press behavior */
+.neo-btn {
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.neo-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.neo-btn:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.neo-card {
+  background-color: var(--paper);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+/* Custom scrollbar in Neobrutalist style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border: 2px solid var(--paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}

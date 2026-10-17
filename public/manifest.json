@@ -1,0 +1,16 @@
+{
+  "name": "FocusDeck — Study Focus Dashboard",
+  "short_name": "FocusDeck",
+  "description": "Distraction-free Neobrutalist study dashboard with live wallpapers, persistent sticky notes, calendar work log, and consistency streaks.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#FFD93D",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

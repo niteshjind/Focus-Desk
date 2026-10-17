@@ -1,0 +1,16 @@
+:root {
+  --ink: #111111;
+  --paper: #FFF8E7;
+  --yellow: #FFD93D;
+  --pink: #FF6B9D;
+  --blue: #4D96FF;
+  --green: #6BCB77;
+  --orange: #FF8C42;
+  --purple: #B983FF;
+
+  --border-thick: 3px solid var(--ink);
+  --shadow-base: 6px 6px 0 var(--ink);
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --shadow-lg: 8px 8px 0 var(--ink);
+  --shadow-xl: 12px 12px 0 var(--ink);
+}
