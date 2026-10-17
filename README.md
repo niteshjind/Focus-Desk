@@ -1,6 +1,6 @@
 # FocusDeck — Study Focus Dashboard
 
-> A distraction-free study space following the **Neobrutalism** design aesthetic. The full viewport is an animated canvas/video live wallpaper, with high-contrast, tactile widgets floating on top: persistent sticky-note tasks, daily work calendar heatmap, consistency streak counter, and study aids.
+> A distraction-free study space following the **Neobrutalism** design aesthetic. The full viewport is an animated canvas/video live wallpaper, with high-contrast, tactile widgets floating on top: persistent sticky-note tasks, daily work calendar heatmap, consistency streak counter, and study aids.😊
 
 ---
 
