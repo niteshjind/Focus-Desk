@@ -108,7 +108,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
             ${mobileTab !== 'notes' ? 'block' : 'hidden sm:flex'}
           `}
         >
-          {/* Mobile view filters */}
+          {/* Mobile view widgets */}
+          {mobileTab === 'timer' && (
+            <div className="flex flex-col gap-4">
+              <PomodoroWidget />
+              <AmbientSoundWidget />
+            </div>
+          )}
           {mobileTab === 'calendar' && <CalendarWidget />}
           {mobileTab === 'streak' && <StreakWidget />}
 

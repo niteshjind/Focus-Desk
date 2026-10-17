@@ -107,7 +107,7 @@ export const LiquidGlassTimerOverlay: React.FC<LiquidGlassTimerOverlayProps> = (
             className="relative z-10 flex flex-col items-center justify-center pointer-events-auto"
           >
             <div
-              className="relative px-12 sm:px-16 md:px-24 py-10 md:py-14 rounded-3xl overflow-hidden backdrop-blur-2xl bg-white/10 border border-white/25 text-center transition-transform hover:scale-[1.02]"
+              className="relative px-6 sm:px-16 md:px-24 py-8 sm:py-10 md:py-14 max-w-[92vw] rounded-3xl overflow-hidden backdrop-blur-2xl bg-white/10 border border-white/25 text-center transition-transform hover:scale-[1.02]"
               style={{
                 boxShadow:
                   '0 25px 60px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -1px 2px rgba(0,0,0,0.2)',
@@ -118,7 +118,7 @@ export const LiquidGlassTimerOverlay: React.FC<LiquidGlassTimerOverlayProps> = (
               <div className="absolute -bottom-28 -right-28 w-56 h-56 bg-white/10 rounded-full blur-3xl pointer-events-none" />
 
               {/* Simple White Text Clock */}
-              <div className="font-mono font-light text-7xl sm:text-8xl md:text-9xl text-white tracking-widest drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] leading-none select-none">
+              <div className="font-mono font-light text-5xl sm:text-7xl md:text-9xl text-white tracking-widest drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] leading-none select-none">
                 {timeString}
               </div>
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Layers, Calendar, Flame, Sparkles } from 'lucide-react';
+import { Layers, Calendar, Flame, Sparkles, Timer } from 'lucide-react';
 
-export type MobileTab = 'notes' | 'calendar' | 'streak' | 'wallpapers';
+export type MobileTab = 'notes' | 'timer' | 'calendar' | 'streak' | 'wallpapers';
 
 export interface MobileTabBarProps {
   activeTab: MobileTab;
@@ -15,11 +15,11 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({
   streakCount,
 }) => {
   return (
-    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#FFF8E7] border-t-[3px] border-[#111111] shadow-[0_-4px_0_#111111] flex items-center justify-around py-2">
+    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#FFF8E7] border-t-[3px] border-[#111111] shadow-[0_-4px_0_#111111] flex items-center justify-around py-2 px-1">
       <button
         onClick={() => onChange('notes')}
         className={`flex flex-col items-center gap-1 font-heading text-[10px] font-black uppercase transition-transform ${
-          activeTab === 'notes' ? 'text-[#111111] scale-110' : 'text-[#111111]/50'
+          activeTab === 'notes' ? 'text-[#111111] scale-110 font-black' : 'text-[#111111]/50'
         }`}
       >
         <Layers className="w-5 h-5" />
@@ -27,9 +27,19 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({
       </button>
 
       <button
+        onClick={() => onChange('timer')}
+        className={`flex flex-col items-center gap-1 font-heading text-[10px] font-black uppercase transition-transform ${
+          activeTab === 'timer' ? 'text-[#FF8C42] scale-110 font-black' : 'text-[#111111]/50'
+        }`}
+      >
+        <Timer className="w-5 h-5" />
+        <span>Timer</span>
+      </button>
+
+      <button
         onClick={() => onChange('calendar')}
         className={`flex flex-col items-center gap-1 font-heading text-[10px] font-black uppercase transition-transform ${
-          activeTab === 'calendar' ? 'text-[#111111] scale-110' : 'text-[#111111]/50'
+          activeTab === 'calendar' ? 'text-[#4D96FF] scale-110 font-black' : 'text-[#111111]/50'
         }`}
       >
         <Calendar className="w-5 h-5" />
@@ -39,7 +49,7 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({
       <button
         onClick={() => onChange('streak')}
         className={`flex flex-col items-center gap-1 font-heading text-[10px] font-black uppercase transition-transform ${
-          activeTab === 'streak' ? 'text-[#FF8C42] scale-110' : 'text-[#111111]/50'
+          activeTab === 'streak' ? 'text-[#FFD93D] scale-110 font-black' : 'text-[#111111]/50'
         }`}
       >
         <div className="relative">
@@ -54,10 +64,10 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({
       <button
         onClick={() => onChange('wallpapers')}
         className={`flex flex-col items-center gap-1 font-heading text-[10px] font-black uppercase transition-transform ${
-          activeTab === 'wallpapers' ? 'text-[#111111] scale-110' : 'text-[#111111]/50'
+          activeTab === 'wallpapers' ? 'text-[#B983FF] scale-110 font-black' : 'text-[#111111]/50'
         }`}
       >
-        <Sparkles className="w-5 h-5 text-[#FFD93D]" />
+        <Sparkles className="w-5 h-5" />
         <span>Themes</span>
       </button>
     </nav>
