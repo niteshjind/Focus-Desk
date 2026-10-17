@@ -15,6 +15,8 @@ import {
   Layers,
 } from 'lucide-react';
 
+import { useTimerStore } from '../../store/timerStore';
+
 export interface TopBarProps {
   onOpenWallpapers: () => void;
   onOpenSettings: () => void;
@@ -33,30 +35,48 @@ export const TopBar: React.FC<TopBarProps> = ({
   const dayStartHour = useSettingsStore((s) => s.dayStartHour);
   const streakStats = computeStreak(completedTasks, new Date(), dayStartHour);
 
+  const isTimerRunning = useTimerStore((s) => s.isRunning);
+  const timeLeft = useTimerStore((s) => s.timeLeft);
+  const timerMinutes = Math.floor(timeLeft / 60);
+  const timerSeconds = timeLeft % 60;
+  const timerString = `${String(timerMinutes).padStart(2, '0')}:${String(timerSeconds).padStart(2, '0')}`;
+
   return (
-    <header className="relative z-20 w-full bg-[#FFF8E7] border-b-[3px] border-[#111111] shadow-[0_4px_0_#111111] px-4 py-2 flex items-center justify-between gap-3 select-none">
+    <header className="relative z-20 w-full bg-[#FFF8E7] border-b-[3px] border-[#111111] shadow-[0_4px_0_#111111] px-2 sm:px-4 py-2 flex items-center justify-between gap-2 sm:gap-3 select-none">
       {/* Brand Logo & Name */}
-      <div className="flex items-center gap-2.5">
-        <div className="w-8 h-8 bg-[#FFD93D] border-[2px] border-[#111111] shadow-[2px_2px_0_#111111] flex items-center justify-center -rotate-3">
-          <Layers className="w-5 h-5 text-[#111111] stroke-[2.5]" />
+      <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="w-7 h-7 sm:w-8 h-8 bg-[#FFD93D] border-[2px] border-[#111111] shadow-[2px_2px_0_#111111] flex items-center justify-center -rotate-3 shrink-0">
+          <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-[#111111] stroke-[2.5]" />
         </div>
         <div className="flex flex-col text-left">
-          <span className="font-heading font-black text-lg tracking-wider text-[#111111] uppercase leading-none">
+          <span className="font-heading font-black text-sm sm:text-lg tracking-wider text-[#111111] uppercase leading-none">
             FocusDeck
           </span>
-          <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-[#111111]/60">
+          <span className="hidden xs:inline text-[9px] sm:text-[10px] font-heading font-bold uppercase tracking-widest text-[#111111]/60">
             Study Dashboard
           </span>
         </div>
       </div>
 
-      {/* Live Digital Clock & Date */}
-      <div className="hidden md:flex flex-col items-center px-4 py-1 bg-white border-[2px] border-[#111111] shadow-[2px_2px_0_#111111]">
-        <span className="font-mono font-bold text-sm text-[#111111] leading-none tracking-wider">
-          {formattedTime}
+      {/* Live Digital Clock / Active Study Timer — Visible on ALL Mobiles and Devices */}
+      <div
+        className={`flex flex-col items-center px-2 sm:px-4 py-0.5 sm:py-1 border-[2px] border-[#111111] shadow-[2px_2px_0_#111111] transition-colors shrink-0 ${
+          isTimerRunning ? 'bg-[#FFD93D]' : 'bg-white'
+        }`}
+        title={isTimerRunning ? 'Study Timer in progress' : 'Current Time'}
+      >
+        <span className="font-mono font-bold text-xs sm:text-sm text-[#111111] leading-none tracking-wider flex items-center gap-1">
+          {isTimerRunning ? (
+            <>
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
+              <span>{timerString}</span>
+            </>
+          ) : (
+            formattedTime
+          )}
         </span>
-        <span className="text-[10px] font-heading font-black uppercase text-[#111111]/70 mt-0.5">
-          {formattedDate}
+        <span className="hidden sm:block text-[9px] sm:text-[10px] font-heading font-black uppercase text-[#111111]/70 mt-0.5">
+          {isTimerRunning ? 'Focus Session' : formattedDate}
         </span>
       </div>
 

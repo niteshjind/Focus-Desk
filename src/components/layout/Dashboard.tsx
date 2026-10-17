@@ -9,8 +9,10 @@ import { MobileTabBar, MobileTab } from './MobileTabBar';
 import { useNotesStore } from '../../store/notesStore';
 import { useHistoryStore } from '../../store/historyStore';
 import { useSettingsStore } from '../../store/settingsStore';
+import { useTimerStore } from '../../store/timerStore';
 import { TaskNote, NoteColor, Priority } from '../../types/focusdeck';
 import { computeStreak } from '../../lib/streak';
+import { Timer } from 'lucide-react';
 
 export interface DashboardProps {
   onCompleteTask: (note: TaskNote) => void;
@@ -40,6 +42,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   const streakStats = computeStreak(completedTasks, new Date(), dayStartHour);
 
+  const isTimerRunning = useTimerStore((s) => s.isRunning);
+  const timeLeft = useTimerStore((s) => s.timeLeft);
+  const startTimer = useTimerStore((s) => s.startTimer);
+  const pauseTimer = useTimerStore((s) => s.pauseTimer);
+  const timerMinutes = Math.floor(timeLeft / 60);
+  const timerSeconds = timeLeft % 60;
+  const timerString = `${String(timerMinutes).padStart(2, '0')}:${String(timerSeconds).padStart(2, '0')}`;
+
   // Filter & search notes
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
@@ -63,7 +73,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   };
 
   return (
-    <div className="relative z-10 w-full h-[calc(100vh-62px)] flex flex-col overflow-hidden">
+    <div className="relative z-10 w-full h-[calc(100dvh-62px)] flex flex-col overflow-hidden">
       {/* Filter / Search Bar across top */}
       <div className="p-3 pb-0 max-w-7xl mx-auto w-full">
         <NoteFilterBar
@@ -85,27 +95,60 @@ export const Dashboard: React.FC<DashboardProps> = ({
         {/* Left / Center Area: Sticky Notes Board */}
         <main
           className={`
-            flex-1 h-full overflow-hidden transition-all
-            ${mobileTab === 'notes' ? 'block' : 'hidden sm:block'}
+            flex-1 h-full overflow-hidden flex flex-col transition-all
+            ${mobileTab === 'notes' ? 'flex' : 'hidden lg:flex'}
           `}
         >
-          <NoteBoard
-            notes={filteredNotes}
-            totalCount={notes.length}
-            onClearFilters={handleClearAllFilters}
-            onCompleteTask={onCompleteTask}
-            isEditorOpen={isNoteEditorOpen}
-            onOpenEditor={onOpenNoteEditor}
-            onCloseEditor={onCloseNoteEditor}
-            onFocusTask={onFocusTask}
-          />
+          {/* Quick Study Timer Bar on Mobile (< lg) so timer is ALWAYS visible on every phone */}
+          <div className="lg:hidden shrink-0 mb-2">
+            <div className="flex items-center justify-between p-2 bg-[#FFF8E7] border-[2px] border-[#111111] shadow-[2px_2px_0_#111111]">
+              <div className="flex items-center gap-2">
+                <span className="font-heading font-black text-xs uppercase flex items-center gap-1 text-[#111111]">
+                  <Timer className="w-4 h-4 text-[#FF8C42]" />
+                  Focus:
+                </span>
+                <span className="font-mono font-bold text-sm bg-white px-2 py-0.5 border border-[#111111] text-[#111111]">
+                  {timerString}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => (isTimerRunning ? pauseTimer() : startTimer())}
+                  className={`px-3 py-1 font-heading text-xs font-black uppercase border-[2px] border-[#111111] shadow-[1px_1px_0_#111111] active:translate-y-0.5 transition-all cursor-pointer ${
+                    isTimerRunning ? 'bg-[#FF6B6B] text-white' : 'bg-[#6BCB77] text-[#111111]'
+                  }`}
+                >
+                  {isTimerRunning ? 'Pause' : 'Start Focus'}
+                </button>
+                <button
+                  onClick={() => setMobileTab('timer')}
+                  className="px-2 py-1 font-heading text-[10px] font-black uppercase bg-[#FFD93D] border-[2px] border-[#111111] shadow-[1px_1px_0_#111111] cursor-pointer"
+                >
+                  Timer Tab ⏱️
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <NoteBoard
+              notes={filteredNotes}
+              totalCount={notes.length}
+              onClearFilters={handleClearAllFilters}
+              onCompleteTask={onCompleteTask}
+              isEditorOpen={isNoteEditorOpen}
+              onOpenEditor={onOpenNoteEditor}
+              onCloseEditor={onCloseNoteEditor}
+              onFocusTask={onFocusTask}
+            />
+          </div>
         </main>
 
         {/* Right Sidebar Widgets: Calendar, Streak, Timer, Sounds */}
         <aside
           className={`
-            w-full sm:w-80 md:w-96 flex flex-col gap-4 overflow-y-auto pr-1 pb-16 sm:pb-4
-            ${mobileTab !== 'notes' ? 'block' : 'hidden sm:flex'}
+            w-full lg:w-96 flex flex-col gap-4 overflow-y-auto pr-1 pb-16 lg:pb-4
+            ${mobileTab !== 'notes' ? 'block' : 'hidden lg:flex'}
           `}
         >
           {/* Mobile view widgets */}
@@ -119,10 +162,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
           {mobileTab === 'streak' && <StreakWidget />}
 
           {/* Desktop view always renders right column widgets */}
-          <div className="hidden sm:flex flex-col gap-4">
+          <div className="hidden lg:flex flex-col gap-4">
             <StreakWidget />
-            <CalendarWidget />
             <PomodoroWidget />
+            <CalendarWidget />
             <AmbientSoundWidget />
           </div>
         </aside>

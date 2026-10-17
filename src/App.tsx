@@ -127,7 +127,7 @@ export const App: React.FC = () => {
   });
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden flex flex-col bg-[#111111]">
+    <div className="relative w-screen h-[100dvh] overflow-hidden flex flex-col bg-[#111111]">
       {/* Background Animated Wallpaper Layer */}
       <WallpaperLayer />
 
