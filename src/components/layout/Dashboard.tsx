@@ -4,7 +4,6 @@ import { NoteFilterBar } from '../notes/NoteFilterBar';
 import { CalendarWidget } from '../calendar/CalendarWidget';
 import { StreakWidget } from '../streak/StreakWidget';
 import { PomodoroWidget } from '../bonus/PomodoroWidget';
-import { AmbientSoundWidget } from '../bonus/AmbientSoundWidget';
 import { MobileTabBar, MobileTab } from './MobileTabBar';
 import { useNotesStore } from '../../store/notesStore';
 import { useHistoryStore } from '../../store/historyStore';
@@ -144,7 +143,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </main>
 
-        {/* Right Sidebar Widgets: Calendar, Streak, Timer, Sounds */}
+        {/* Right Sidebar Widgets: Streak, Timer, Calendar */}
         <aside
           className={`
             w-full lg:w-96 flex flex-col gap-4 overflow-y-auto pr-1 pb-16 lg:pb-4
@@ -155,7 +154,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
           {mobileTab === 'timer' && (
             <div className="flex flex-col gap-4">
               <PomodoroWidget />
-              <AmbientSoundWidget />
             </div>
           )}
           {mobileTab === 'calendar' && <CalendarWidget />}
@@ -166,7 +164,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <StreakWidget />
             <PomodoroWidget />
             <CalendarWidget />
-            <AmbientSoundWidget />
           </div>
         </aside>
       </div>

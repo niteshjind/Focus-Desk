@@ -37,7 +37,7 @@ Access the live dashboard anytime on PC, Tablet, or Mobile:
 ### 📱 100% Mobile & Tablet Compatible
 - **Mobile Bottom Navigation Bar**: Easy one-thumb access on smartphones to 5 dedicated tabs:
   - 📝 **Notes**: Freely draggable and list sticky notes.
-  - ⏱️ **Timer**: Study Timer with custom minutes and ambient sounds.
+  - ⏱️ **Timer**: Study Timer with preset and custom minutes.
   - 📅 **Log**: Calendar monthly completion heatmap.
   - 🔥 **Streak**: Consistency flame tracker and statistics.
   - ✨ **Themes**: Wallpaper picker and custom video/photo upload manager.
@@ -63,10 +63,6 @@ Access the live dashboard anytime on PC, Tablet, or Mobile:
 - Animated flame icon (flame dances when active today; warning state if at risk).
 - Night owl setting ($4:00\text{ AM}$ day start boundary) to ensure late-night study sessions count towards the correct streak day.
 - Milestone celebration confetti bursts (`canvas-confetti`) at 3, 7, 14, 30, 60, 100, and 365 days.
-
-### 🎧 Offline Ambient Sound Mixer
-- Procedural rain and white noise sound synthesizers built using the Web Audio API (100% offline, zero audio asset downloads needed).
-- Independent volume sliders with instant toggle controls.
 
 ### 🔒 100% Private & Local-First Storage
 - All tasks, streak logs, settings, and custom wallpapers remain completely private and stored directly in your browser's `localStorage` and `IndexedDB`.
